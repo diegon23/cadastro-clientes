@@ -18,18 +18,14 @@
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
 
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
 </head>
 
 <script type="text/javascript">
-	function validatePass(e){
-		if(e.value.length < 6){
-			alert("A senha deve ter no mínimo 6 digitos!");
-			document.getElementById("password").value = "";
-		}
-	}
 	
 	function validateCPF(e){
 		strCPF = e.value;
@@ -39,6 +35,7 @@
 		if (strCPF == "00000000000") { 
 			alert("CPF inválido!");
 			document.getElementById("cpf").value = "";
+			return;
 		}
 		 
 		for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
@@ -48,6 +45,7 @@
 		if (Resto != parseInt(strCPF.substring(9, 10)) ) {
 			alert("CPF inválido!");
 			document.getElementById("cpf").value = "";
+			return;
 	    }
 		Soma = 0;
 		for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
@@ -57,20 +55,29 @@
 		if (Resto != parseInt(strCPF.substring(10, 11) ) ) {
 			alert("CPF inválido!");
 			document.getElementById("cpf").value = "";
+			return;
 		}
 	}
 	
-	function validateDDD(e){
-		if(e.value.length != 2 || e.value == "00" || isNaN(e.value)){
-			alert("O DDD deve ser um número de 2 digitos e ser diferente de zero!");
-			document.getElementById("ddd").value = "";
+	function validateName(e){
+		if(e.value.length < 1 || !isNaN(e.value)){
+			alert("O nome não pode ser vazio");
+			document.getElementById("name").value = "";
+		}
+	}
+	
+	function validateEmail(e){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(!re.test(e.value)){
+			alert("O email informado não é válido");
+			document.getElementById("email").value = "";
 		}
 	}
 	
 	function validatePhone(e){
-		if(e.value.length < 9 || isNaN(e.value)){
+		if(e.value.length != 9 || isNaN(e.value)){
 			alert("O telefone deve ser um número e ter 9 digitos!");
-			document.getElementById("phone").value = "";
+			document.getElementById("telefone").value = "";
 		}
 	}
 </script>
@@ -87,7 +94,7 @@
                     <h2 class="title">Dados do Cliente</h2>
                     <form method="POST" action="../controller/ClienteCOntroller.php">
                         <div class="input-group">
-                            <input required class="input--style-1" type="text" placeholder="Seu nome..." name="nome">
+                            <input required class="input--style-1" type="text" placeholder="Seu nome..." id="name" name="nome" onchange="validateName(this)">
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
@@ -98,25 +105,22 @@
                             </div>
                             <div class="col-2">
 								<div class="input-group">
-									<input required class="input--style-1" type="text" placeholder="Seu cpf..." name="cpf">
+									<input required class="input--style-1" type="text" placeholder="Seu cpf..." id="cpf" name="cpf" onchange="validateCPF(this)">
 								</div>
                             </div>
                         </div>
 						<div class="input-group">
-							<input required class="input--style-1" type="text" placeholder="Seu e-mail..." name="email">
+							<input required class="input--style-1" type="text" placeholder="Seu e-mail..." id="email" name="email" onchange="validateEmail(this)">
 						</div>
 						<div class="input-group">
-							<input required class="input--style-1" type="text" placeholder="Seu telefone..." name="telefone">
-						</div>
-						<div class="input-group">
-							<input required class="input--style-1" type="text" placeholder="Seu endereço..." name="endereco">
+							<input required class="input--style-1" type="text" placeholder="Seu telefone..." id="telefone" name="telefone" onchange="validatePhone(this)">
 						</div>
                         <div class="row row-space">
 							<div class="p-t-20">
 								<button class="btn btn--radius btn--green" type="submit">Salvar Cliente</button>
 							</div>
 							<div class="p-t-20">
-								<button class="btn btn--radius btn--green" onclick="">Arquivo de Clientes</button>
+								<button class="btn btn--radius btn--green" onclick="window.location='../model/export.php'">Exportar Arquivo de Clientes</button>
 							</div>
                         </div>
                     </form>

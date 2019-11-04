@@ -7,6 +7,5 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `cpf` VARCHAR(11) NULL,
   `telefone` INT(12) NULL,
   `email` VARCHAR(100) NULL,
-  `endereco` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));

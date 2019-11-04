@@ -5,9 +5,9 @@
 		$conn = OpenCon();
 		
 		$sqlSalvar = 'insert into clientes
-		(nome, dt_cadastro, dt_nascimento, cpf, telefone, endereco, email)
+		(nome, dt_cadastro, dt_nascimento, cpf, telefone, email)
 		values
-		("'.$cliente['nome'].'",  CURDATE(), STR_TO_DATE("'.$cliente['nascimento'].'", "%d/%m/%Y"), "'.$cliente['cpf'].'", "'.$cliente['telefone'].'", "'.$cliente['endereco'].'", "'.$cliente['email'].'")';
+		("'.$cliente['nome'].'",  CURDATE(), STR_TO_DATE("'.$cliente['nascimento'].'", "%d/%m/%Y"), "'.$cliente['cpf'].'", "'.$cliente['telefone'].'", "'.$cliente['email'].'")';
 	
 		if($conn->query($sqlSalvar) === TRUE){
 			
@@ -21,7 +21,7 @@
 	function getAllCustomersDb(){
 		$conn = OpenCon();
 		$retorno = "";
-		$sqlConsulta = 'select * from clientes';
+		$sqlConsulta = 'select nome, dt_nascimento, cpf,telefone, email from clientes where dt_cancelamento is null';
 		$cliente = $conn->query($sqlConsulta);
 		$retorno = array();
 		if (isset($cliente) && $cliente != null && is_object($cliente) && $cliente->num_rows > 0) {
