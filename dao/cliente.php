@@ -5,9 +5,9 @@
 		$conn = OpenCon();
 		
 		$sqlSalvar = 'insert into clientes
-		(nome, dt_cadastro, dt_nascimento, cpf, telefone, email)
+		(nome, dt_cadastro, dt_nascimento, cpf, telefone, email, nome_mae, nome_pai, dependentes)
 		values
-		("'.$cliente['nome'].'",  CURDATE(), STR_TO_DATE("'.$cliente['nascimento'].'", "%d/%m/%Y"), "'.$cliente['cpf'].'", "'.$cliente['telefone'].'", "'.$cliente['email'].'")';
+		("'.$cliente['nome'].'",  CURDATE(), STR_TO_DATE("'.$cliente['nascimento'].'", "%d/%m/%Y"), "'.$cliente['cpf'].'", "'.$cliente['telefone'].'", "'.$cliente['email'].'", "'.$cliente['nome_mae'].'", "'.$cliente['nome_pai'].'", "'.$cliente['dependentes'].'")';
 	
 		if($conn->query($sqlSalvar) === TRUE){
 			

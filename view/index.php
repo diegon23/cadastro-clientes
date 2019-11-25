@@ -61,7 +61,7 @@
 	
 	function validateName(e){
 		if(e.value.length < 1 || !isNaN(e.value)){
-			alert("O nome não pode ser vazio");
+			alert("Campos de nome não podem ser vazios");
 			document.getElementById("name").value = "";
 		}
 	}
@@ -114,6 +114,15 @@
 						</div>
 						<div class="input-group">
 							<input required class="input--style-1" type="text" placeholder="Seu telefone..." id="telefone" name="telefone" onchange="validatePhone(this)">
+						</div>
+						<div class="input-group">
+							<input required class="input--style-1" type="text" placeholder="O nome da sua mãe..." id="nome_mae" name="nome_mae" onchange="validateName(this)">
+						</div>
+						<div class="input-group">
+							<input required class="input--style-1" type="text" placeholder="O nome do seu pai..." id="nome_pai" name="nome_pai" onchange="validateName(this)">
+						</div>
+						<div class="input-group">
+							<input required class="input--style-1" type="text" placeholder="Quantidade de dependentes..." id="dependentes" name="dependentes">
 						</div>
                         <div class="row row-space">
 							<div class="p-t-20">

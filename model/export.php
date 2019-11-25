@@ -8,9 +8,11 @@
 			die();
 		}
 		
-		$fp = fopen('exportacaoClientes'.time().'.csv', 'w');
+		$fp = fopen('C:/Users/diego.nogueira/Documents/exportacaoClientes'.time().'.csv', 'w');
 
 		foreach ($clientes as $fields) {
+			$fields["nome"] = ucwords(strtolower($fields["nome"]));
+			$fields["nome"] = str_replace(" ", "", $fields["nome"]);
 			fputcsv($fp, $fields, ';');
 		}
 
